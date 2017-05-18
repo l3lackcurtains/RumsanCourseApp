@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import { Grid } from 'react-bootstrap'
+import { Grid, Col, Row } from 'react-bootstrap'
 
-// import './index.scss'
+import styles from './index.scss'
 
 class course extends Component {
   render() {
     return (
     <div className="course">
       <Grid>
-        <Col xs={12} md={6} />
-          Welcome
-        <Col>
-        <Col xs={12} md={6} />
-          <div className="course-action">
-            <Link to="/add-course">Add</Link>
-          </div>
-        </Col>
+        <Row className={styles.courses_box}>
+          <Col xs={12} md={6}>
+            Our Course Lists
+          </Col>
+          <Col xs={12} md={6}>
+            <div className={styles.course_action}>
+              <Link to="/add-course">Add</Link>
+            </div>
+          </Col>
+        </Row>
       </Grid>
     </div>
     )

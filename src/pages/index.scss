@@ -1,0 +1,38 @@
+body{
+	background: #f9f9f9;
+}
+
+.login_wrapper{
+	.login_grid{
+		display: table;
+		.login_box{
+			display: table-cell;
+			vertical-align: middle;
+			width: 400px;
+			margin: 20px auto;
+			.login{
+				background: #fff;
+				padding: 16px;
+				border: 1px solid #e3e3e3;
+				.login_nav{
+					margin-top: 16px;
+				}
+			}
+		}
+	}
+}
+
+.register_wrapper{
+	.register_box{
+		margin: 40px 20%;
+		padding-bottom: 80px;
+		.register{
+			padding: 16px;
+			background: #fff;
+			border: 1px solid #e3e3e3;
+			.register_nav{
+				margin-top: 16px;
+			}
+		}
+	}
+}
