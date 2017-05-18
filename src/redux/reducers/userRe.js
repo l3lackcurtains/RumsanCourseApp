@@ -55,4 +55,4 @@ const registerRe = (state = initState, action) => {
 	}
 }
 
-export default { loginRe, registerRe }
+export { loginRe, registerRe }

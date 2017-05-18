@@ -17,7 +17,7 @@ export const loginUserErr = data => ({
 })
 
 // Actions for register
-export const registerUser = formValue => ({
+export const registerUser = formValues => ({
 	type: A.REQ_REGISTER,
 	formValue
 })
