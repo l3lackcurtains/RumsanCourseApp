@@ -5,11 +5,11 @@ import { browserHistory } from 'react-router'
 
 import validateInput from '../../validations/course'
 import store from '../../redux'
-import { updateNewCourse } from '../../redux/actions/courseAc'
+import { updateSelectedCourse, fetchCourseById } from '../../redux/actions/courseAc'
 import { uploadRequest } from '../../redux/actions/upload'
 import styles from './index.scss'
 
-@connect( state => ({ updateNewCourse: state.updateNewCourse, upload: state.upload }))
+@connect( state => ({ updateCourse: state.updateCourse, upload: state.upload, courseById: state.courseById }))
 class updateCourse extends Component {
   constructor(props) {
     super(props)
@@ -31,6 +31,10 @@ class updateCourse extends Component {
     this.handleFileUpload = this.handleFileUpload.bind(this)
   }
 
+   componentWillMount() {
+    const id = this.props.location.query.id
+    store.dispatch(fetchCourseById(id))
+  }
   // On form submit method
   onSubmit(e) {
     e.preventDefault()
@@ -38,7 +42,8 @@ class updateCourse extends Component {
     // Update course if values are valid
     if (isValid) {
       this.setState({ errors: {}, isLoading: true })
-      store.dispatch(updateNewCourse(this.state))
+      const id = this.props.location.query.id
+      store.dispatch(updateSelectedCourse(id, this.state))
     } else {
       this.setState({ errors })
     }
@@ -56,12 +61,27 @@ class updateCourse extends Component {
     store.dispatch(uploadRequest({ file, name: 'image' }))
   }
 
+  componentWillUpdate(nextProps, nextState){
+    if(JSON.stringify(nextProps) !== JSON.stringify(this.props) && nextProps.courseById !== 'undefined' && typeof(nextProps.courseById) !== 'undefined') {
+      const data = nextProps.courseById.data.message
+      this.setState({
+        name: data.name,
+        description: data.description,
+        price: data.price,
+        instructor: data.instructor,
+        startdate: data.startdate,
+        category: data.category,
+        address: data.address
+      })
+    }
+  }
+
   render() {
     const { name, description, price, instructor, startdate, category, address, image, errors, isLoading } = this.state
-    const { addNewCourse, upload } = this.props
+    const { updateCourse, upload, courseById } = this.props
 
     // Redirect to home page if form submission is completed
-    if(addNewCourse.isReceived) {
+    if(updateCourse.isReceived) {
       browserHistory.push({ pathname: '/' })
     }
     return (

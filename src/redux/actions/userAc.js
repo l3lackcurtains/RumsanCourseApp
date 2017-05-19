@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode'
 import A from './index'
 
 // Set current user action
-const setCurrentUser = (data) => ({
+export const setCurrentUser = (data) => ({
 	type: A.SET_CURRENT_USER,
 	data
 })
@@ -61,6 +61,7 @@ export const loginUser = data => dispatch => {
 			const token = res.data.token
 			localStorage.setItem('jwtToken', token)
 			setAuthorizationToken(token)
+			dispatch(setCurrentUser(jwtDecode(token)))
 			dispatch(loginUserSuccess(res.data.message))
 		} else {
 			dispatch(loginUserErr(res.data.message))
@@ -83,7 +84,6 @@ export const registerUser = data => dispatch => {
 			const token = res.data.token
 			localStorage.setItem('jwtToken', token)
 			setAuthorizationToken(token)
-			dispatch(setCurrentUser(jwtDecode(token)))
 			dispatch(registerUserSuccess(res.data.message))
 		} else {
 			dispatch(registerUserErr(res.data.message))

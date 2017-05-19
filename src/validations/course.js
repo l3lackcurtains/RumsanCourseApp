@@ -4,7 +4,7 @@ import isEmpty from 'lodash/isEmpty'
 // Validate input field for course
 const validateInput = data => {
 	let errors = {}
-
+	console.log(data)
 	if(validator.isEmpty(data.name)) {
 		errors.name = 'name field is empty.'
 	}
@@ -13,11 +13,11 @@ const validateInput = data => {
 		errors.description = 'description field is empty.'
 	}
 
-	if(validator.isEmpty(data.startDate)) {
+	if(validator.isEmpty(data.startdate.toString()) && data.startdate !== 'undefined') {
 		errors.startDate = 'startDate field is empty.'
 	}
 
-	if(validator.isEmpty(data.price)) {
+	if(validator.isEmpty(data.price.toString())) {
 		errors.price = 'price field is empty.'
 	}
 

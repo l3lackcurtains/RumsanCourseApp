@@ -2,6 +2,7 @@ import { combineReducers, applyMiddleware, createStore } from 'redux'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 import { routerReducer } from 'react-router-redux'
+import jwtDecode from 'jwt-decode'
 
 import { setCurrentUser } from './actions/userAc'
 import setAuthorizationToken from '../utils/setAuthorizationToken'
@@ -25,7 +26,7 @@ let middleware = applyMiddleware(thunk, logger)
 const store = createStore(appReducer, middleware)
 
 // Dispatch set current user action for authorization
-if (localStorage.jwtToken) {
+if (localStorage.jwtToken && localStorage.jwtToken !== 'undefined') {
   setAuthorizationToken(localStorage.jwtToken)
   store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)))
 }

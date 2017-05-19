@@ -1,5 +1,5 @@
 import { loginRe, registerRe, authRe } from './userRe'
-import { getCourseRe, addNewCourseRe, updateCourseRe, deleteCourseRe } from './courseRe'
+import { getCourseRe, getCourseByIdRe, addNewCourseRe, updateCourseRe, deleteCourseRe } from './courseRe'
 import { uploadRe } from './uploadRe'
 
 export default {
@@ -7,6 +7,7 @@ export default {
 	register: registerRe,
 	auth: authRe,
 	course: getCourseRe,
+	courseById: getCourseByIdRe,
 	addNewCourse: addNewCourseRe,
 	updateCourse: updateCourseRe,
 	deleteCourse: deleteCourseRe,

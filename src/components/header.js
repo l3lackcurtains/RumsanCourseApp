@@ -3,7 +3,7 @@ import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
 import { Link } from 'react-router'
 import styles from './index.scss'
 
-const Header = () => {
+const Header = ({ auth, logout }) => {
 	return(
 	<Navbar collapseOnSelect className={styles.header}>
 		<Navbar.Header>
@@ -14,7 +14,11 @@ const Header = () => {
 		</Navbar.Header>
 		<Navbar.Collapse>
 			<Nav pullRight>
-				<Link to="/login">Login</Link>
+				<div className={styles.header_navs}>
+					{
+						auth.isAuthenticated ? <a onClick={logout} href="#">Logout</a> :<Link to="/login">Login</Link>
+					}
+				</div>
 			</Nav>
 		</Navbar.Collapse>
 	</Navbar>

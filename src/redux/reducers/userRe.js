@@ -1,4 +1,5 @@
 import A from '../actions'
+import isEmpty from 'lodash/isEmpty'
 
 // Initial state
 const initState = {
@@ -15,7 +16,7 @@ const initialState = {
 
 export const authRe = (state = initialState, action) => {
   switch(action.type) {
-	case SET_CURRENT_USER:
+	case A.SET_CURRENT_USER:
 		return {
 		isAuthenticated: !isEmpty(action.data),
 		user: action.data

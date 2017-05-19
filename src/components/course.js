@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Image, Col, Row } from 'react-bootstrap'
-import { Link } from 'react-router'
 
 import styles from './index.scss'
 
-const Course = ({ course }) => {
+const Course = ({ course, navigateToUpdate, deleteCourse }) => {
 	return(
 	<div className={styles.course_wrapper}>
 		<Row>
@@ -20,8 +19,12 @@ const Course = ({ course }) => {
 			</Col>
 			<Col xs={6} md={1}>
 				<div className={styles.course_action}>
-					<p className={styles.course_action_link}><Link to="/update-course">Update</Link></p>
-					<p className={styles.course_action_link}><a>Delete</a></p>
+					<p className={styles.course_action_link}>
+						<a href="#" onClick={() => { navigateToUpdate(course._id) }}>Update</a>
+					</p>
+					<p className={styles.course_action_link}>
+						<a href="#" onClick={() => { deleteCourse(course._id) }}>Delete</a>
+					</p>
 				</div>
 			</Col>
 		</Row>

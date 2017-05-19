@@ -22,11 +22,6 @@ var api = require('./routes/api');
 var app = express();
 process.env.PWD = process.cwd();
 
-/*
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-*/
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -56,27 +51,24 @@ app.use('/api', api);
 
 
 // Multer File Uploads
-// File Upload setting
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads/');
+  destination: './files',
+  filename(req, file, cb) {
+    cb(null, `${new Date()}-${file.originalname}`);
   },
-  filename: function (req, file, cb) {
-    var filename = bcrypt.hashSync( file.originalname + '-' + Date.now() );
-    cb(null, filename+path.extname(file.originalname));
-  }
 });
 
-var upload = multer({ storage: storage }).single('file')
+var upload = multer({ storage }).single('file');
 
 app.post('/upload', function (req, res) {
   upload(req, res, function (err) {
+		console.log(res)
     if (err) {
       res.json({ status: false, message: err });
     }
 	res.json({status: true, message: { filename: req.file, filepath: "/uploads/"+req.file }});
-  })
-})
+  });
+});
 
 
 // Setup for webpack and client renderer

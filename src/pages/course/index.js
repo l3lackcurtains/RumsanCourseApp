@@ -2,15 +2,25 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { Grid, Col, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
+
 import store from '../../redux'
-import { fetchCourse } from '../../redux/actions/courseAc'
+import { fetchCourse, deleteSelectedCourse } from '../../redux/actions/courseAc'
 import Course from '../../components/course'
 import styles from './index.scss'
 
-@connect( state => ({ course: state.course }))
+@connect( state => ({ course: state.course, deleteCourse: state.deleteCourse }))
 class course extends Component {
   componentWillMount() {
-      store.dispatch(fetchCourse(this.props.source) )
+      store.dispatch(fetchCourse())
+  }
+
+  navigateToUpdate(id) {
+	   	browserHistory.push({pathname: '/update-course', query: {id: id} })
+  }
+  
+  deleteCourse(id) {
+    store.dispatch(deleteSelectedCourse(id)).then(() => store.dispatch(fetchCourse()))
   }
 
   render() {
@@ -29,7 +39,11 @@ class course extends Component {
           </Col>
           <Col>
             <div className={styles.course_list}>
-              {!course.isReceived ? <p>No courses found</p> : course.data.message.map((data, i) => <Course course={data} key={i} />)}
+              {!course.isReceived ?
+                <p>No courses found</p>
+                :
+                course.data.message.map((data, i) => <Course course={data} key={i} navigateToUpdate={this.navigateToUpdate} deleteCourse={this.deleteCourse}/>)
+              }
             </div>
           </Col>
         </Row>

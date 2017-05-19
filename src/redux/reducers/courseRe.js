@@ -33,6 +33,31 @@ export const getCourseRe = (state = initState, action) => {
 	}
 }
 
+// Reducer for fetching course by ID
+export const getCourseByIdRe = (state = initState, action) => {
+	switch (action.type) {
+	case A.REQ_COURSE_BY_ID:
+		return {
+			...state,
+			isLoading: true
+		}
+	case A.REC_COURSE_BY_ID:
+		return {
+			...state,
+			isReceived: true,
+			isLoading: false,
+			data: action.data
+		}
+	case A.REC_COURSE_BY_ID_ERR:
+		return {
+			...state,
+			error: true
+		}
+	default:
+		return state
+	}
+}
+
 // Reducer for adding new course
 export const addNewCourseRe = (state = initState, action) => {
 	switch (action.type) {
