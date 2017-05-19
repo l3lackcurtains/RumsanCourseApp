@@ -1,22 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addFlashMessage } from '../actions/flashMessages'
+import { browserHistory } from 'react-router'
 
+// Using high order function (HOC) for authorization
 export default function(ComposedComponent) {
   class Authenticate extends Component {
     componentWillMount() {
       if (!this.props.isAuthenticated) {
-        this.props.addFlashMessage({
-          type: 'error',
-          text: 'You are not authorized to see this page.'
-        })
-        this.context.router.push('/login')
+        browserHistory.push({ pathname: '/login' })
       }
     }
 
     componentWillUpdate(nextProps) {
       if (!nextProps.isAuthenticated) {
-        this.context.router.push('/')
+        browserHistory.push({ pathname: '/' })
       }
     }
 
@@ -26,12 +23,5 @@ export default function(ComposedComponent) {
       )
     }
   }
-
- function mapStateToProps(state) {
-    return {
-      isAuthenticated: state.auth.isAuthenticated
-    }
-  }
-
-  return connect(mapStateToProps, { addFlashMessage })(Authenticate)
+ return Authenticate
 }

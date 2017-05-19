@@ -1,0 +1,22 @@
+.header{
+	background: #ffffff;
+}
+
+.course_wrapper{
+	border: 1px solid #e3e3e3;
+	padding: 16px;
+	background: #ffffff;
+	position: relative;
+	margin: 16px;
+	margin-top: 48px;
+	.course_image{
+		overflow: hidden;
+		width: 100%;
+	}
+	.course_action{
+		margin-top: 16px;
+		.course_action_link{
+			padding: 4px 0;
+		}
+	}
+}

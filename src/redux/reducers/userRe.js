@@ -1,12 +1,31 @@
 import A from '../actions'
 
+// Initial state
 const initState = {
 	isLoading: false,
 	isReceived: false,
 	data: {},
 	error: false
 }
+// Initial state for set user
+const initialState = {
+  isAuthenticated: false,
+  user: {}
+}
 
+export const authRe = (state = initialState, action) => {
+  switch(action.type) {
+	case SET_CURRENT_USER:
+		return {
+		isAuthenticated: !isEmpty(action.data),
+		user: action.data
+		}
+	default:
+		return state
+  }
+}
+
+// reducer for user login
 const loginRe = (state = initState, action) => {
 	switch (action.type) {
 	case A.REQ_LOGIN:
@@ -31,6 +50,7 @@ const loginRe = (state = initState, action) => {
 	}
 }
 
+// reducer for user register
 const registerRe = (state = initState, action) => {
 	switch (action.type) {
 	case A.REQ_REGISTER:

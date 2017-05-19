@@ -3,36 +3,43 @@ import setAuthorizationToken from '../../utils/setAuthorizationToken'
 import jwtDecode from 'jwt-decode'
 import A from './index'
 
+// Set current user action
+const setCurrentUser = (data) => ({
+	type: A.SET_CURRENT_USER,
+	data
+})
+
 // Actions for login
-export const loginUserReq = () => ({
+const loginUserReq = () => ({
 	type: A.REQ_LOGIN
 })
 
-export const loginUserSuccess = data => ({
+const loginUserSuccess = data => ({
 	type: A.REC_LOGIN,
 	data
 })
 
-export const loginUserErr = data => ({
+const loginUserErr = data => ({
 	type: A.REC_LOGIN_ERR,
 	data
 })
 
 // Actions for register
-export const registerUserReq = () => ({
+const registerUserReq = () => ({
 	type: A.REQ_REGISTER
 })
 
-export const registerUserSuccess = data => ({
+const registerUserSuccess = data => ({
 	type: A.REC_REGISTER,
 	data
 })
 
-export const registerUserErr = data => ({
+const registerUserErr = data => ({
 	type: A.REC_REGISTER_ERR,
 	data
 })
 
+// Logout User
 export const logoutUser = () => {
   return dispatch => {
     localStorage.removeItem('jwtToken')
@@ -41,6 +48,7 @@ export const logoutUser = () => {
   }
 }
 
+// Login user from server
 export const loginUser = data => dispatch => {
 	dispatch(loginUserReq())
 	const url = '/user/authenticate'
@@ -62,6 +70,7 @@ export const loginUser = data => dispatch => {
 	})
 }
 
+// Register user to the server
 export const registerUser = data => dispatch => {
 	dispatch(registerUserReq())
 	const url = '/user/register'
@@ -74,6 +83,7 @@ export const registerUser = data => dispatch => {
 			const token = res.data.token
 			localStorage.setItem('jwtToken', token)
 			setAuthorizationToken(token)
+			dispatch(setCurrentUser(jwtDecode(token)))
 			dispatch(registerUserSuccess(res.data.message))
 		} else {
 			dispatch(registerUserErr(res.data.message))
@@ -82,4 +92,3 @@ export const registerUser = data => dispatch => {
 		dispatch(registerUserErr(err))
 	})
 }
-

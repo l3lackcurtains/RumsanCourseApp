@@ -1,9 +1,8 @@
 import { combineReducers, applyMiddleware, createStore } from 'redux'
-import { connect } from 'react-redux'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 import { routerReducer } from 'react-router-redux'
-import jwtDecode from 'jwt-decode'
+
 import { setCurrentUser } from './actions/userAc'
 import setAuthorizationToken from '../utils/setAuthorizationToken'
 import rootReducers from './reducers'
@@ -19,10 +18,16 @@ const logger = createLogger({
 	level: 'info'
 })
 
-// Apply saga, router and logger middlewares
+// Apply thunk and logger middlewares ( remove logger in production mode)
 let middleware = applyMiddleware(thunk, logger)
 
 // Create Store for redux
 const store = createStore(appReducer, middleware)
+
+// Dispatch set current user action for authorization
+if (localStorage.jwtToken) {
+  setAuthorizationToken(localStorage.jwtToken)
+  store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)))
+}
 
 export default store

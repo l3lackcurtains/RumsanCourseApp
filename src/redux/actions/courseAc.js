@@ -1,6 +1,7 @@
 import axios from 'axios'
 import A from './index'
 
+// Actions for fetching courses
 const getCourseReq = () => ({
 	type: A.REQ_COURSE
 })
@@ -15,6 +16,7 @@ const getCourseErr = data => ({
 	data
 })
 
+// Actions for adding new course
 const addCourseReq = () => ({
 	type: A.REQ_ADD_COURSE
 })
@@ -29,6 +31,7 @@ const addCourseErr = data => ({
 	data
 })
 
+// Actions for updating course
 const updateCourseReq = () => ({
 	type: A.REQ_UPDATE_COURSE
 })
@@ -43,20 +46,22 @@ const updateCourseErr = data => ({
 	data
 })
 
+// Actions for deleting course
 const deleteCourseReq = () => ({
-	type: A.REQ_COURSE
+	type: A.REQ_DELETE_COURSE
 })
 
 const deleteCourseSuccess = data => ({
-	type: A.REC_COURSE,
+	type: A.REC_DELETE_COURSE,
 	data
 })
 
 const deleteCourseErr = data => ({
-	type: A.REC_COURSE_ERR,
+	type: A.REC_DELETE_COURSE_ERR,
 	data
 })
 
+// Fetch courses from server
 export const fetchCourse = () => dispatch => {
 	dispatch(getCourseReq())
 	const url = '/api/courses'
@@ -74,6 +79,7 @@ export const fetchCourse = () => dispatch => {
 	} )		
 }
 
+// Add new course to the server
 export const addNewCourse = data => dispatch => {
 	dispatch(addCourseReq())
 	const url = '/api/course'
@@ -89,5 +95,43 @@ export const addNewCourse = data => dispatch => {
 		}
 	}).catch(err => {
 		dispatch(addCourseErr(err))
+	})
+}
+
+// Update course in the server
+export const updateCourse = data => dispatch => {
+	dispatch(updateCourseReq())
+	const url = '/api/course'
+	return axios({
+		method: 'post',
+		url: url,
+		data: data
+		}).then(res => {
+		if(res.data.success) {
+			dispatch(updateCourseSuccess(res.data.message))
+		} else {
+			dispatch(updateCourseErr(res.data.message))
+		}
+	}).catch(err => {
+		dispatch(updateCourseErr(err))
+	})
+}
+
+// Detete course from server
+export const deleteCourse = data => dispatch => {
+	dispatch(deleteCourseReq())
+	const url = '/api/course'
+	return axios({
+		method: 'post',
+		url: url,
+		data: data
+		}).then(res => {
+		if(res.data.success) {
+			dispatch(deleteCourseSuccess(res.data.message))
+		} else {
+			dispatch(deleteCourseErr(res.data.message))
+		}
+	}).catch(err => {
+		dispatch(deleteCourseErr(err))
 	})
 }

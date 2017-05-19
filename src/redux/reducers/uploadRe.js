@@ -1,5 +1,6 @@
 import A from '../actions'
 
+// Initial state
 const initState = {
 	isLoading: false,
 	isReceived: false,
@@ -7,6 +8,7 @@ const initState = {
 	error: false
 }
 
+// Reducer for file upload
 export const uploadRe = (state = initState, action) => {
 	switch (action.type) {
 	case A.REQ_UPLOAD:

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import A from './index'
 
+// Actions for file uploads
 const uploadReq = () => ({
 	type: A.REQ_UPLOAD
 })
@@ -15,9 +16,10 @@ const uploadErr = data => ({
 	data
 })
 
+// Upload request to thes server
 export const uploadRequest = ({ file, name }) => {
 	let data = new FormData()
-	data.append('file', document)
+	data.append('file', file)
 	data.append('name', name)
 	return (dispatch) => {
 		dispatch(uploadReq())

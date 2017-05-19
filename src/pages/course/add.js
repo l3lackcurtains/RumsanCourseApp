@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Grid, Col, Row, FormControl, FormGroup, ControlLabel, Button, Form, Glyphicon, FieldGroup, HelpBlock } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
+
 import validateInput from '../../validations/course'
 import store from '../../redux'
 import { addNewCourse } from '../../redux/actions/courseAc'
@@ -12,6 +13,7 @@ import styles from './index.scss'
 class addCourse extends Component {
   constructor(props) {
     super(props)
+    // Initialize state for form submission and errors
     this.state = {
       name: '',
       description: '',
@@ -29,9 +31,11 @@ class addCourse extends Component {
     this.handleFileUpload = this.handleFileUpload.bind(this)
   }
 
+  // On form submit method
   onSubmit(e) {
     e.preventDefault()
     const { errors, isValid } = validateInput(this.state)
+    // Add course if values are valid
     if (isValid) {
       this.setState({ errors: {}, isLoading: true })
       store.dispatch(addNewCourse(this.state))
@@ -40,18 +44,23 @@ class addCourse extends Component {
     }
   }
 
+  // On Input field change method
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  // On changes on upload field, Upload the image to server
   handleFileUpload(e) {
     e.preventDefault()
     const file = e.target.files[0]
     store.dispatch(uploadRequest({ file, name: 'image' }))
   }
+
   render() {
     const { name, description, price, instructor, startdate, category, address, image, errors, isLoading } = this.state
     const { addNewCourse, upload } = this.props
+
+    // Redirect to home page if form submission is completed
     if(addNewCourse.isReceived) {
       browserHistory.push({ pathname: '/' })
     }

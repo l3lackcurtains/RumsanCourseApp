@@ -3,6 +3,7 @@ import { Grid, Col, Row, FormControl, FormGroup, ControlLabel, Button, Form, Gly
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { browserHistory } from 'react-router'
+
 import validateInput from '../validations/register'
 import store from '../redux'
 import { registerUser } from '../redux/actions/userAc'
@@ -12,6 +13,7 @@ import styles from './index.scss'
 class register extends Component {
   constructor(props) {
     super(props)
+    // Initialize state for form submission and errors
     this.state = {
       email: '',
       username: '',
@@ -27,9 +29,11 @@ class register extends Component {
     this.onChange = this.onChange.bind(this)
   }
 
+  // On form submit method
   onSubmit(e) {
     e.preventDefault()
     const { errors, isValid } = validateInput(this.state)
+    // Register User if values are valid
     if (isValid) {
       this.setState({ errors: {}, isLoading: true })
       store.dispatch(registerUser(this.state))
@@ -38,6 +42,7 @@ class register extends Component {
     }
   }
 
+  // On Input field change method
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -45,6 +50,8 @@ class register extends Component {
   render() {
     const { email, password, username, firstname, lastname, phone, address, errors, isLoading } = this.state
     const { register } = this.props
+
+    // Redirect to home page if form submission is completed
     if(register.isReceived) {
       browserHistory.push({ pathname: '/' })
     }

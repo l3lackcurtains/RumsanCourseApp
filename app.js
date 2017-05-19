@@ -35,6 +35,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(expressValidator());
+app.disable('etag');
 
 // Setup Mongoose connection with mongoDB
 mongoose.connect(config.mdb, function(err, database){
@@ -55,23 +56,25 @@ app.use('/api', api);
 
 
 // Multer File Uploads
+// File Upload setting
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '/tmp/my-uploads')
+    cb(null, 'public/uploads/');
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
+    var filename = bcrypt.hashSync( file.originalname + '-' + Date.now() );
+    cb(null, filename+path.extname(file.originalname));
   }
-})
+});
 
-var upload = multer()
+var upload = multer({ storage: storage }).single('file')
 
 app.post('/upload', function (req, res) {
   upload(req, res, function (err) {
     if (err) {
-      res.json({status: false, message: err});
+      res.json({ status: false, message: err });
     }
-	res.json({status: true, message: req.file });
+	res.json({status: true, message: { filename: req.file, filepath: "/uploads/"+req.file }});
   })
 })
 
