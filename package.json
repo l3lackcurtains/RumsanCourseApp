@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "server": "nodemon ./bin/www",
-    "start": "node ./bin/www",
+    "start": "node ./app",
     "clean": "rimraf dist",
     "build": "npm run clean && cross-env NODE_ENV=production webpack src/index.js --config webpack.config.prod.js",
     "prod": "cross-env NODE_ENV=production && node ./bin/www"
@@ -19,8 +19,11 @@
     "express": "~4.15.2",
     "express-validator": "^3.2.0",
     "jsonwebtoken": "^7.4.1",
+    "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.4",
     "mongoose": "^4.9.9",
     "morgan": "~1.8.1",
+    "multer": "^1.3.0",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "pug": "~2.0.0-beta11",
@@ -33,8 +36,10 @@
     "react-router-redux": "4.0.7",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.6",
-    "redux-saga": "^0.15.3",
-    "serve-favicon": "~2.4.2"
+    "redux-thunk": "^2.2.0",
+    "serve-favicon": "~2.4.2",
+    "validator": "^7.0.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

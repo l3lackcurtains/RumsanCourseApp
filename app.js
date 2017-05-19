@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var passport = require('passport');
 var expressValidator = require('express-validator');
+var multer =require('multer');
+var bcrypt     = require('bcrypt-nodejs');
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
@@ -51,6 +53,29 @@ require('./utils/passport')(passport);
 app.use('/user', user);
 app.use('/api', api);
 
+
+// Multer File Uploads
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '/tmp/my-uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+
+var upload = multer()
+
+app.post('/upload', function (req, res) {
+  upload(req, res, function (err) {
+    if (err) {
+      res.json({status: false, message: err});
+    }
+	res.json({status: true, message: req.file });
+  })
+})
+
+
 // Setup for webpack and client renderer
 if (process.env.NODE_ENV !== 'production') {
 	var indexPath = path.join(__dirname, './src/index.html');
@@ -72,5 +97,11 @@ if (process.env.NODE_ENV !== 'production') {
 		res.sendFile(indexPath);
 	});
 }
+
+var port = process.env.PORT || '3000'
+
+app.listen(port, function() {
+	console.log('App Connected to 3000 port');
+})
 
 module.exports = app;

@@ -1,12 +1,12 @@
 import { combineReducers, applyMiddleware, createStore } from 'redux'
 import { connect } from 'react-redux'
 import { createLogger } from 'redux-logger'
-import createSagaMiddleware from 'redux-saga'
+import thunk from 'redux-thunk'
 import { routerReducer } from 'react-router-redux'
-
-
+import jwtDecode from 'jwt-decode'
+import { setCurrentUser } from './actions/userAc'
+import setAuthorizationToken from '../utils/setAuthorizationToken'
 import rootReducers from './reducers'
-import rootSagas from './sagas'
 
 // Combine all reducers including the routes
 const appReducer = combineReducers({
@@ -20,13 +20,9 @@ const logger = createLogger({
 })
 
 // Apply saga, router and logger middlewares
-const sagaMiddleware = createSagaMiddleware()
-let middleware = applyMiddleware(sagaMiddleware, logger)
+let middleware = applyMiddleware(thunk, logger)
 
 // Create Store for redux
 const store = createStore(appReducer, middleware)
-
-// Run sagas Middleware
-sagaMiddleware.run(rootSagas)
 
 export default store
