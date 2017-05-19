@@ -1,6 +1,6 @@
 {
   "name": "courseapp",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "server": "nodemon ./app",
@@ -66,5 +66,9 @@
     "webpack": "^2.5.1",
     "webpack-dev-middleware": "^1.10.2",
     "webpack-hot-middleware": "^2.18.0"
+  },
+  "engines": {
+    "node": "7.9.0",
+    "npm": "4.2.0"
   }
 }
