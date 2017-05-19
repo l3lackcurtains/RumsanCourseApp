@@ -21,7 +21,7 @@ var api = require('./routes/api');
 
 var app = express();
 process.env.PWD = process.cwd();
-
+var port = process.env.PORT || 3000
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -95,10 +95,8 @@ if (process.env.NODE_ENV !== 'production') {
 	});
 }
 
-var port = process.env.PORT || '3000'
-
 app.listen(port, function() {
-	console.log('App Connected to 3000 port');
+	console.log(`App Connected to ${port} port`);
 })
 
 module.exports = app;
