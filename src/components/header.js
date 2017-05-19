@@ -8,7 +8,7 @@ const Header = ({ auth, logout }) => {
 	<Navbar collapseOnSelect className={styles.header}>
 		<Navbar.Header>
 			<Navbar.Brand>
-				<Link to="/">Ramsan Course</Link>
+				<Link to="/">Rumsan Course</Link>
 			</Navbar.Brand>
 			<Navbar.Toggle />
 		</Navbar.Header>
