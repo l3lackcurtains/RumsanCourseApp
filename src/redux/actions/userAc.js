@@ -79,11 +79,8 @@ export const registerUser = data => dispatch => {
 		method: 'post',
 		url: url,
 		data: data
-		}).then(res => {
+	}).then(res => {
 		if(res.data.success) {
-			const token = res.data.token
-			localStorage.setItem('jwtToken', token)
-			setAuthorizationToken(token)
 			dispatch(registerUserSuccess(res.data.message))
 		} else {
 			dispatch(registerUserErr(res.data.message))

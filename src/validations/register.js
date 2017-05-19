@@ -25,7 +25,7 @@ const validateInput = data => {
 		errors.lastname = 'lastname field is empty.'
 	}
 
-	if(validator.isEmpty(data.phone)) {
+	if(validator.isEmpty(data.phone.toString())) {
 		errors.phone = 'phone field is empty.'
 	}
 	
