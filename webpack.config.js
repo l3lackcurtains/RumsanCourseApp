@@ -9,7 +9,6 @@ const DEFAULT_PORT = 3000
 const config ={
   devtool: 'cheap-module-source-map',
   entry: [
-    'whatwg-fetch',
 		'webpack/hot/dev-server',
 		'webpack-hot-middleware/client?reload=true',
     'babel-polyfill',

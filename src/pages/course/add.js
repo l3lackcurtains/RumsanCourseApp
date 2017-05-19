@@ -56,6 +56,18 @@ class addCourse extends Component {
     store.dispatch(uploadRequest({ file, name: 'image' }))
   }
 
+  // After uploading image send path
+  componentWillUpdate(nextProps, nextState){
+    if(JSON.stringify(nextProps) !== JSON.stringify(this.props) && nextProps.upload.isReceived) {
+      const data = nextProps.upload.data
+      console.log(data)
+      const imgUrl = process.env.NODE_ENV !== 'production' ? 'https://localhost:3000/files/':'https://rumsancourse.herokuapp.com/files/' + data.message.filename.filename
+      this.setState({
+        image: imgUrl
+      })
+    }
+  }
+
   render() {
     const { name, description, price, instructor, startdate, category, address, image, errors, isLoading } = this.state
     const { addNewCourse, upload } = this.props
@@ -169,7 +181,7 @@ class addCourse extends Component {
                 />
               </FormGroup>
               {' '}
-              <Button type="submit">
+              <Button type="submit" disabled={isLoading}>
                 <Glyphicon glyph="star" /> Add Course
                 </Button>
             </Form>

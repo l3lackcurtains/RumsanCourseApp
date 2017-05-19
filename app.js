@@ -30,7 +30,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(expressValidator());
-app.disable('etag');
 
 // Setup Mongoose connection with mongoDB
 mongoose.connect(config.mdb, function(err, database){
@@ -49,25 +48,28 @@ require('./utils/passport')(passport);
 app.use('/user', user);
 app.use('/api', api);
 
+//  Header configuration
+app.use(function(req, res, next) { //allow cross origin requests
+    res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
+    res.header("Access-Control-Allow-Origin", "http://localhost");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // Multer File Uploads
 var storage = multer.diskStorage({
   destination: './files',
   filename(req, file, cb) {
-    cb(null, `${new Date()}-${file.originalname}`);
+	var filename = bcrypt.hashSync(file.originalname + '-' + Date.now())+path.extname(file.originalname);
+    cb(null, filename);
   },
 });
 
-var upload = multer({ storage }).single('file');
+var upload = multer({ storage });
 
-app.post('/upload', function (req, res) {
-  upload(req, res, function (err) {
-		console.log(res)
-    if (err) {
-      res.json({ status: false, message: err });
-    }
-	res.json({status: true, message: { filename: req.file, filepath: "/uploads/"+req.file }});
-  });
+app.post('/upload', upload.single('file'), function (req, res) {
+  	const file = req.file;
+	res.json({status: true, message: { filename: file.filename }});
 });
 
 

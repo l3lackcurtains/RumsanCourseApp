@@ -23,9 +23,14 @@ export const uploadRequest = ({ file, name }) => {
 	data.append('name', name)
 	return (dispatch) => {
 		dispatch(uploadReq())
-		axios.post('/upload', data).then(res => {
-			console.log(res)
-			dispatch(uploadSuccess(res)) 
+		axios({
+			url: '/upload',
+			method: 'post',
+			data: data
+		}).then(res => {
+			dispatch(uploadSuccess(res.data)) 
+		}).catch(err => {
+			dispatch(uploadErr(err))
 		})
 	}
 }

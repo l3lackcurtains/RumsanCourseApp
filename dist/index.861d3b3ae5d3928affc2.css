@@ -1,0 +1,62 @@
+.index__header___2ycdU {
+  background: #ffffff; }
+  .index__header___2ycdU .index__header_navs___26U_d {
+    padding: 12px; }
+
+.index__course_wrapper___1bCAh {
+  border: 1px solid #e3e3e3;
+  padding: 16px;
+  background: #ffffff;
+  position: relative;
+  margin: 16px;
+  margin-top: 48px; }
+  .index__course_wrapper___1bCAh .index__course_image___XAiDc {
+    overflow: hidden;
+    width: 100%; }
+  .index__course_wrapper___1bCAh .index__course_action___1LPeY {
+    margin-top: 16px; }
+    .index__course_wrapper___1bCAh .index__course_action___1LPeY .index__course_action_link___UFI5P {
+      padding: 4px 0; }
+body {
+  background: #f9f9f9; }
+
+.index__login_wrapper___2Q3pf .index__login_grid___3cPQy {
+  display: table; }
+  .index__login_wrapper___2Q3pf .index__login_grid___3cPQy .index__login_box___2tPeF {
+    display: table-cell;
+    vertical-align: middle;
+    width: 400px;
+    margin: 20px auto; }
+    .index__login_wrapper___2Q3pf .index__login_grid___3cPQy .index__login_box___2tPeF .index__login___1mdmc {
+      background: #fff;
+      padding: 16px;
+      border: 1px solid #e3e3e3; }
+      .index__login_wrapper___2Q3pf .index__login_grid___3cPQy .index__login_box___2tPeF .index__login___1mdmc .index__login_nav___1xPme {
+        margin-top: 16px; }
+
+.index__register_wrapper___TUCuu .index__register_box___2tCSi {
+  margin: 40px 20%;
+  padding-bottom: 80px; }
+  .index__register_wrapper___TUCuu .index__register_box___2tCSi .index__register___2n5lo {
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #e3e3e3; }
+    .index__register_wrapper___TUCuu .index__register_box___2tCSi .index__register___2n5lo .index__register_nav___3Ib11 {
+      margin-top: 16px; }
+.index__courses_box___JItCU {
+  margin-top: 20px; }
+  .index__courses_box___JItCU .index__course_action___2j3hA {
+    text-align: right;
+    margin-right: 16px; }
+
+.index__course_wrapper___2Z8dK .index__course_box___3XL6S {
+  margin: 40px 20%;
+  padding-bottom: 80px; }
+  .index__course_wrapper___2Z8dK .index__course_box___3XL6S .index__course___1h8lz {
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #e3e3e3; }
+    .index__course_wrapper___2Z8dK .index__course_box___3XL6S .index__course___1h8lz .index__course_nav___29HCw {
+      margin-top: 16px; }
+
+/*# sourceMappingURL=index.861d3b3ae5d3928affc2.css.map*/

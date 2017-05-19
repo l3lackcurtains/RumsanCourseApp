@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "server": "nodemon ./bin/www",
+    "server": "nodemon ./app",
     "start": "node ./app",
     "clean": "rimraf dist",
     "build": "npm run clean && cross-env NODE_ENV=production webpack src/index.js --config webpack.config.prod.js",
-    "prod": "cross-env NODE_ENV=production && node ./bin/www"
+    "prod": "cross-env NODE_ENV=production && node ./app"
   },
   "dependencies": {
     "axios": "^0.16.1",
@@ -39,8 +39,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "serve-favicon": "~2.4.2",
-    "validator": "^7.0.0",
-    "whatwg-fetch": "^2.0.3"
+    "validator": "^7.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
