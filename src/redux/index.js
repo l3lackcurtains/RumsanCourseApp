@@ -10,8 +10,8 @@ import rootReducers from './reducers'
 
 // Combine all reducers including the routes
 const appReducer = combineReducers({
-  ...rootReducers,
-  routing: routerReducer 
+	...rootReducers,
+	routing: routerReducer
 })
 
 // Redux Logger Options
@@ -20,15 +20,16 @@ const logger = createLogger({
 })
 
 // Apply thunk and logger middlewares ( remove logger in production mode)
-let middleware = applyMiddleware(thunk, logger)
+const middleware = applyMiddleware(thunk, logger)
 
 // Create Store for redux
 const store = createStore(appReducer, middleware)
 
+/* eslint-disable */
 // Dispatch set current user action for authorization
 if (localStorage.jwtToken && localStorage.jwtToken !== 'undefined') {
-  setAuthorizationToken(localStorage.jwtToken)
-  store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)))
+	setAuthorizationToken(localStorage.jwtToken)
+	store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)))
 }
 
 export default store

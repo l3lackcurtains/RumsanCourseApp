@@ -54,10 +54,10 @@ export const loginUser = data => dispatch => {
 	const url = '/user/authenticate'
 	return axios({
 		method: 'post',
-		url: url,
-		data: data
-		}).then(res => {
-		if(res.data.success) {
+		url,
+		data
+		}).then((res) => {
+		if (res.data.success) {
 			const token = res.data.token
 			localStorage.setItem('jwtToken', token)
 			setAuthorizationToken(token)
@@ -66,9 +66,7 @@ export const loginUser = data => dispatch => {
 		} else {
 			dispatch(loginUserErr(res.data.message))
 		}
-	}).catch(err => {
-		dispatch(loginUserErr(err))
-	})
+	}).catch(err =>dispatch(loginUserErr(err)))
 }
 
 // Register user to the server
@@ -77,15 +75,13 @@ export const registerUser = data => dispatch => {
 	const url = '/user/register'
 	return axios({
 		method: 'post',
-		url: url,
-		data: data
-	}).then(res => {
-		if(res.data.success) {
+		url,
+		data
+	}).then((res) => {
+		if (res.data.success) {
 			dispatch(registerUserSuccess(res.data.message))
 		} else {
 			dispatch(registerUserErr(res.data.message))
 		}
-	}).catch(err => {
-		dispatch(registerUserErr(err))
-	})
+	}).catch(err =>dispatch(registerUserErr(err)))
 }

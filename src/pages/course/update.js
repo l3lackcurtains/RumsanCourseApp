@@ -87,114 +87,118 @@ class updateCourse extends Component {
     return (
     <div className={styles.course_wrapper}>
       <Grid className={styles.course_grid}>
-        <div className={styles.course_box} style={{ height: window.innerHeight-120 }}>
-          <div className={styles.course} >
-            <Form onSubmit={this.onSubmit}>
-              <FormGroup controlId="formInlineName" validationState={ !!errors.name ? 'error': null }>
-                <ControlLabel>Course Name *</ControlLabel>
-                {' '}
-                <FormControl
-                  type="text"
-                  placeholder="Python Programming"
-                  name="name"
-                  value={name}
-                  onChange={this.onChange}
-                />
-                <HelpBlock>{!!errors.name ? errors.name : ''}</HelpBlock>
-              </FormGroup>
-              {' '}
-              <FormGroup controlId="formInlineDesc" validationState={ !!errors.description ? 'error': null }>
-                <ControlLabel>Description *</ControlLabel>
-                {' '}
-                <FormControl
-                  componentClass="textarea"
-                  placeholder="textarea"
-                  name="description"
-                  value={description}
-                  onChange={this.onChange}
-                />
-                <HelpBlock>{!!errors.description ? errors.description : ''}</HelpBlock>
-              </FormGroup>
-              {' '}
-              <FormGroup controlId="formInlinePrice" validationState={ !!errors.price ? 'error': null }>
-                <ControlLabel>Price (Nrs)</ControlLabel>
-                {' '}
-                <FormControl
-                  type="number"
-                  placeholder="5000"
-                  name="price"
-                  value={price}
-                  onChange={this.onChange}
-                />
-                <HelpBlock>{!!errors.price ? errors.price : ''}</HelpBlock>
-              </FormGroup>
-              {' '}
-              <FormGroup controlId="formInlineInstructor" validationState={ !!errors.instructor ? 'error': null }>
-                <ControlLabel>Instructor</ControlLabel>
-                {' '}
-                <FormControl
-                  type="text"
-                  placeholder="Jane"
-                  name="instructor"
-                  value={instructor}
-                  onChange={this.onChange}
-                />
-                <HelpBlock>{!!errors.instructor ? errors.instructor : ''}</HelpBlock>
-              </FormGroup>
-              {' '}
-              <FormGroup controlId="formInlineStartdate" validationState={ !!errors.startdate ? 'error': null }>
-                <ControlLabel>Start Date</ControlLabel>
-                {' '}
-                <FormControl
-                  type="date"
-                  name="startdate"
-                  value={startdate}
-                  onChange={this.onChange}
-                />
-                <HelpBlock>{!!errors.startdate ? errors.startdate : ''}</HelpBlock>
-              </FormGroup>             
-              {' '}
-              <FormGroup controlId="formInlineCategory" validationState={ !!errors.category ? 'error': null }>
-                <ControlLabel>Category</ControlLabel>
-                {' '}
-                <FormControl
-                  type="text"
-                  placeholder="Programming"
-                  name="category"
-                  value={category}
-                  onChange={this.onChange}
-                />
-                <HelpBlock>{!!errors.category ? errors.category : ''}</HelpBlock>
-              </FormGroup>
-              {' '}
-              <FormGroup controlId="formInlineAddress" validationState={ !!errors.address ? 'error': null }>
-                <ControlLabel>Address</ControlLabel>
-                {' '}
-                <FormControl
-                  type="text"
-                  placeholder="Kathmandu, Nepal"
-                  name="address"
-                  value={address}
-                  onChange={this.onChange}
-                />
-                <HelpBlock>{!!errors.address ? errors.address : ''}</HelpBlock>
-              </FormGroup>
-              {' '}
-              <FormGroup controlId="formInlineImage">
-                <ControlLabel>Image</ControlLabel>
-                {' '}
-                <FormControl
-                  type="file"
-                  onChange={this.handleFileUpload}
-                />
-              </FormGroup>
-              {' '}
-              <Button type="submit">
-                <Glyphicon glyph="star" /> Add Course
-                </Button>
-            </Form>
-          </div>
-        </div>
+        <Row>
+          <Col xs={10} xsOffset={1} md={8} mdOffset={2}>
+            <div className={styles.course_box}>
+              <div className={styles.course} >
+                <Form onSubmit={this.onSubmit}>
+                  <FormGroup controlId="formInlineName" validationState={ !!errors.name ? 'error': null }>
+                    <ControlLabel>Course Name *</ControlLabel>
+                    {' '}
+                    <FormControl
+                      type="text"
+                      placeholder="Python Programming"
+                      name="name"
+                      value={name}
+                      onChange={this.onChange}
+                    />
+                    <HelpBlock>{!!errors.name ? errors.name : ''}</HelpBlock>
+                  </FormGroup>
+                  {' '}
+                  <FormGroup controlId="formInlineDesc" validationState={ !!errors.description ? 'error': null }>
+                    <ControlLabel>Description *</ControlLabel>
+                    {' '}
+                    <FormControl
+                      componentClass="textarea"
+                      placeholder="textarea"
+                      name="description"
+                      value={description}
+                      onChange={this.onChange}
+                    />
+                    <HelpBlock>{!!errors.description ? errors.description : ''}</HelpBlock>
+                  </FormGroup>
+                  {' '}
+                  <FormGroup controlId="formInlinePrice" validationState={ !!errors.price ? 'error': null }>
+                    <ControlLabel>Price (Nrs)</ControlLabel>
+                    {' '}
+                    <FormControl
+                      type="number"
+                      placeholder="5000"
+                      name="price"
+                      value={price}
+                      onChange={this.onChange}
+                    />
+                    <HelpBlock>{!!errors.price ? errors.price : ''}</HelpBlock>
+                  </FormGroup>
+                  {' '}
+                  <FormGroup controlId="formInlineInstructor" validationState={ !!errors.instructor ? 'error': null }>
+                    <ControlLabel>Instructor</ControlLabel>
+                    {' '}
+                    <FormControl
+                      type="text"
+                      placeholder="Jane"
+                      name="instructor"
+                      value={instructor}
+                      onChange={this.onChange}
+                    />
+                    <HelpBlock>{!!errors.instructor ? errors.instructor : ''}</HelpBlock>
+                  </FormGroup>
+                  {' '}
+                  <FormGroup controlId="formInlineStartdate" validationState={ !!errors.startdate ? 'error': null }>
+                    <ControlLabel>Start Date</ControlLabel>
+                    {' '}
+                    <FormControl
+                      type="date"
+                      name="startdate"
+                      value={startdate}
+                      onChange={this.onChange}
+                    />
+                    <HelpBlock>{!!errors.startdate ? errors.startdate : ''}</HelpBlock>
+                  </FormGroup>             
+                  {' '}
+                  <FormGroup controlId="formInlineCategory" validationState={ !!errors.category ? 'error': null }>
+                    <ControlLabel>Category</ControlLabel>
+                    {' '}
+                    <FormControl
+                      type="text"
+                      placeholder="Programming"
+                      name="category"
+                      value={category}
+                      onChange={this.onChange}
+                    />
+                    <HelpBlock>{!!errors.category ? errors.category : ''}</HelpBlock>
+                  </FormGroup>
+                  {' '}
+                  <FormGroup controlId="formInlineAddress" validationState={ !!errors.address ? 'error': null }>
+                    <ControlLabel>Address</ControlLabel>
+                    {' '}
+                    <FormControl
+                      type="text"
+                      placeholder="Kathmandu, Nepal"
+                      name="address"
+                      value={address}
+                      onChange={this.onChange}
+                    />
+                    <HelpBlock>{!!errors.address ? errors.address : ''}</HelpBlock>
+                  </FormGroup>
+                  {' '}
+                  <FormGroup controlId="formInlineImage">
+                    <ControlLabel>Image</ControlLabel>
+                    {' '}
+                    <FormControl
+                      type="file"
+                      onChange={this.handleFileUpload}
+                    />
+                  </FormGroup>
+                  {' '}
+                  <Button type="submit">
+                    <Glyphicon glyph="star" /> Add Course
+                    </Button>
+                </Form>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </Grid>
     </div>
     )

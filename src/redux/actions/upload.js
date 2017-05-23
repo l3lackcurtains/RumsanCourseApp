@@ -16,9 +16,10 @@ const uploadErr = data => ({
 	data
 })
 
+/* eslint-disable */
 // Upload request to thes server
 export const uploadRequest = ({ file, name }) => {
-	let data = new FormData()
+	const data = new FormData()
 	data.append('file', file)
 	data.append('name', name)
 	return (dispatch) => {
@@ -26,11 +27,8 @@ export const uploadRequest = ({ file, name }) => {
 		axios({
 			url: '/upload',
 			method: 'post',
-			data: data
-		}).then(res => {
-			dispatch(uploadSuccess(res.data)) 
-		}).catch(err => {
-			dispatch(uploadErr(err))
-		})
+			data
+		}).then(res => dispatch(uploadSuccess(res.data)))
+		.catch(err => dispatch(uploadErr(err)))
 	}
 }

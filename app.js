@@ -8,8 +8,8 @@ var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var passport = require('passport');
 var expressValidator = require('express-validator');
-var multer =require('multer');
-var bcrypt     = require('bcrypt-nodejs');
+var multer = require('multer');
+var bcrypt = require('bcrypt-nodejs');
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
@@ -21,7 +21,7 @@ var api = require('./routes/api');
 
 var app = express();
 process.env.PWD = process.cwd();
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 3000;
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -32,14 +32,14 @@ app.use(cookieParser());
 app.use(expressValidator());
 
 // Setup Mongoose connection with mongoDB
-mongoose.connect(config.mdb, function(err, database){
+mongoose.connect(config.mdb, function(err, database) {
 	console.log("Connected to database successfully.");
 })
 // Using bluebird Promise removes depricated warning
-mongoose.Promise = Promise
+mongoose.Promise = Promise;
 
 // Middlewares
-app.use(passport.initialize())
+app.use(passport.initialize());
 
 // Require passport
 require('./utils/passport')(passport);
@@ -48,30 +48,21 @@ require('./utils/passport')(passport);
 app.use('/user', user);
 app.use('/api', api);
 
-//  Header configuration
-app.use(function(req, res, next) { //allow cross origin requests
-    res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
-    res.header("Access-Control-Allow-Origin", "http://localhost");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-
 // Multer File Uploads
 var storage = multer.diskStorage({
-  destination: './files',
+  destination: './src/upload',
   filename(req, file, cb) {
 	var filename = bcrypt.hashSync(file.originalname + '-' + Date.now())+path.extname(file.originalname);
     cb(null, filename);
-  },
+  }
 });
-
 var upload = multer({ storage });
 
+// Upload api endpoint
 app.post('/upload', upload.single('file'), function (req, res) {
   	const file = req.file;
-	res.json({status: true, message: { filename: file.filename }});
+	res.json({ status: true, message: { filename: file.filename, file: file }});
 });
-
 
 // Setup for webpack and client renderer
 if (process.env.NODE_ENV !== 'production') {

@@ -24,8 +24,7 @@ body{
 
 .register_wrapper{
 	.register_box{
-		margin: 40px 20%;
-		padding-bottom: 80px;
+		padding-bottom: 40px;
 		.register{
 			padding: 16px;
 			background: #fff;
@@ -35,4 +34,8 @@ body{
 			}
 		}
 	}
+}
+
+.title {
+	text-align: center;
 }

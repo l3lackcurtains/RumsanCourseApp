@@ -20,11 +20,11 @@ render(
   <Provider store={store}>
 		<Router history={history}>
 			<Route path="/" component={Main}>
-				<IndexRoute component={course}></IndexRoute>
-				<Route path="/login" component={login}></Route>
-				<Route path="/register" component={register}></Route>
-				<Route path="/add-course" component={requireAuth(addCourse)}></Route>
-				<Route path="/update-course" component={requireAuth(updateCourse)}></Route>
+				<IndexRoute component={course} />
+				<Route path="/login" component={login} />
+				<Route path="/register" component={register} />
+				<Route path="/add-course" component={requireAuth(addCourse)} />
+				<Route path="/update-course" component={requireAuth(updateCourse)} />
 			</Route>
 		</Router>
 	</Provider>

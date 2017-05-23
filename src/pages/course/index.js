@@ -16,7 +16,7 @@ class course extends Component {
   }
 
   navigateToUpdate(id) {
-	   	browserHistory.push({pathname: '/update-course', query: {id: id} })
+	   	browserHistory.push({pathname: '/update-course', query: { id } })
   }
   
   deleteCourse(id) {
@@ -34,13 +34,13 @@ class course extends Component {
           </Col>
           <Col xs={2} md={2}>
             <div className={styles.course_action}>
-              <Link to="/add-course">Add</Link>
+              <Link to="add-course">Add</Link>
             </div>
           </Col>
           <Col>
             <div className={styles.course_list}>
               {!course.isReceived ?
-                <p>No courses found</p>
+                <p>...</p>
                 :
                 course.data.message.map((data, i) => <Course course={data} key={i} navigateToUpdate={this.navigateToUpdate} deleteCourse={this.deleteCourse}/>)
               }

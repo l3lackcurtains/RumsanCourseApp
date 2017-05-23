@@ -77,30 +77,26 @@ const deleteCourseErr = data => ({
 })
 
 // Fetch courses from server
-export const fetchCourse = () => dispatch => {
+export const fetchCourse = () => (dispatch) => {
 	dispatch(getCourseReq())
 	const url = '/api/courses'
-	const res = axios({
-		url: url,
-		timeout: 20000,
+	return axios({
+		url,
 		method: 'get',
 		responseType: 'json'
 	})
 	.then((res) => {
 		dispatch(getCourseSuccess(res.data))
 	})
-	.catch(err => {
-		dispatch(getCourseErr(err))
-	} )		
+	.catch(err => dispatch(getCourseErr(err)))		
 }
 
 // Fetch course by id from server
-export const fetchCourseById = id => dispatch => {
+export const fetchCourseById = id => (dispatch) => {
 	dispatch(getCourseByIdReq())
-	const url = '/api/course/'+id
-	const res = axios({
-		url: url,
-		timeout: 20000,
+	const url = `/api/course/${id}`
+	return axios({
+		url,
 		method: 'get',
 		responseType: 'json'
 	})
@@ -111,15 +107,15 @@ export const fetchCourseById = id => dispatch => {
 }
 
 // Add new course to the server
-export const addNewCourse = data => dispatch => {
+export const addNewCourse = data => (dispatch) => {
 	dispatch(addCourseReq())
 	const url = '/api/course'
 	return axios({
 		method: 'post',
-		url: url,
-		data: data
-		}).then(res => {
-		if(res.data.success) {
+		url,
+		data
+	}).then((res) => {
+		if (res.data.success) {
 			dispatch(addCourseSuccess(res.data.message))
 		} else {
 			dispatch(addCourseErr(res.data.message))
@@ -128,38 +124,34 @@ export const addNewCourse = data => dispatch => {
 }
 
 // Update course in the server
-export const updateSelectedCourse = (id, data) => dispatch => {
+export const updateSelectedCourse = (id, data) => (dispatch) => {
 	dispatch(updateCourseReq())
-	const url = '/api/course/'+id
+	const url = `/api/course/${id}`
 	return axios({
 		method: 'put',
-		url: url,
-		data: data
-	}).then(res => {
-		if(res.data.success) {
+		url,
+		data
+	}).then((res) => {
+		if (res.data.success) {
 			dispatch(updateCourseSuccess(res.data.message))
 		} else {
 			dispatch(updateCourseErr(res.data.message))
 		}
-	}).catch(err => {
-		dispatch(updateCourseErr(err))
-	})
+	}).catch(err => dispatch(updateCourseErr(err)))
 }
 
 // Detete course from server
-export const deleteSelectedCourse = id => dispatch => {
+export const deleteSelectedCourse = id => (dispatch) => {
 	dispatch(deleteCourseReq())
-	const url = '/api/course/'+id
+	const url = `/api/course/${id}`
 	return axios({
 		method: 'delete',
-		url: url
-	}).then(res => {
-		if(res.data.success) {
+		url
+	}).then((res) => {
+		if (res.data.success) {
 			dispatch(deleteCourseSuccess(res.data))
 		} else {
 			dispatch(deleteCourseErr(res.data))
 		}
-	}).catch(err => {
-		dispatch(deleteCourseErr(err))
-	})
+	}).catch(err => dispatch(deleteCourseErr(err)))
 }

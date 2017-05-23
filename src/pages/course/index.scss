@@ -7,17 +7,18 @@
 	}
 }
 
-.course_wrapper{
-	.course_box{
-		margin: 40px 20%;
-		padding-bottom: 80px;
-		.course{
-			padding: 16px;
-			background: #fff;
-			border: 1px solid #e3e3e3;
-			.course_nav{
-				margin-top: 16px;
-			}
+.course_box{
+	margin-bottom: 40px;
+	.course{
+		padding: 16px;
+		background: #fff;
+		border: 1px solid #e3e3e3;
+		.course_nav{
+			margin-top: 16px;
 		}
 	}
+}
+
+.title {
+	text-align: center;
 }
