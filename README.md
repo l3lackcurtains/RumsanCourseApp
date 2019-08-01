@@ -41,5 +41,3 @@ yarn run build
 yarn run prod
 ```
 
-> Demo available at [https://rumsancourse.herokuapp.com](https://rumsancourse.herokuapp.com).
-
